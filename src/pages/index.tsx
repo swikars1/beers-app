@@ -28,7 +28,6 @@ export default function Home() {
     fetchNextPage,
     hasNextPage,
   } = useBeers();
-  console.log({ beers });
   return (
     <>
       {isLoading ? (
@@ -38,7 +37,7 @@ export default function Home() {
           {beers?.pages?.map((page) =>
             page?.data?.map((beer) => (
               <Fragment key={beer.id}>
-                <BeerInfo key={beer.id} beer={beer} />
+                <BeerInfo beer={beer} />
               </Fragment>
             ))
           )}
