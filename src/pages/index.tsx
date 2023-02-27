@@ -1,32 +1,59 @@
-import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
+import { Beer } from "@/types/beer";
+import { useBeers } from "@/queries/beers.query";
+import { Fragment, useRef } from "react";
+import { isError } from "@tanstack/react-query";
 
 const inter = Inter({ subsets: ["latin"] });
 
-function Card({ children }: { children: React.ReactNode }) {
+function BeerInfo({ beer }: { beer: Beer }) {
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg w-max p-4">
-      {children}
-    </div>
-  );
-}
-
-function BeerInfo({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg w-max p-4">
-      {children}
+    <div className="bg-white shadow overflow-hidden sm:rounded-lg p-4 flex ">
+      <Image src={beer.image_url} alt="a beer image" height={200} width={100} />
+      <div>
+        <h2>{beer.name}</h2>
+        <p>{beer.tagline}</p>
+        <p>{beer.description}</p>
+      </div>
     </div>
   );
 }
 
 export default function Home() {
+  const {
+    data: beers,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useBeers();
+  console.log({ beers });
   return (
-    <div className="">
-      <h1 className="text-3xl font-bold">Hello </h1>
-      <p className="text-3xl ">world </p>
-      <Card>aasd</Card>
-    </div>
+    <>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 lg:sm:grid-cols-2 p-10">
+          {beers?.pages?.map((page) =>
+            page?.data?.map((beer) => (
+              <Fragment key={beer.id}>
+                <BeerInfo key={beer.id} beer={beer} />
+              </Fragment>
+            ))
+          )}
+        </div>
+      )}
+      {isFetchingNextPage && <p>Loading more...</p>}
+      <div
+        onClick={() => {
+          if (!isFetchingNextPage && hasNextPage) {
+            fetchNextPage();
+          }
+        }}
+      >
+        Load More
+      </div>
+    </>
   );
 }
