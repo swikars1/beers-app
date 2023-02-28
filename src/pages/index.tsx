@@ -1,58 +1,44 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { Beer } from "@/types/beer";
-import { useBeers } from "@/queries/beers.query";
-import { Fragment, useRef } from "react";
-import { isError } from "@tanstack/react-query";
-
-const inter = Inter({ subsets: ["latin"] });
-
-function BeerInfo({ beer }: { beer: Beer }) {
-  return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg p-4 flex ">
-      <Image src={beer.image_url} alt="a beer image" height={200} width={100} />
-      <div>
-        <h2>{beer.name}</h2>
-        <p>{beer.tagline}</p>
-        <p>{beer.description}</p>
-      </div>
-    </div>
-  );
-}
+import { AllBeers } from "@/components/AllBeers";
+import { MyBeers } from "@/components/MyBeers";
+import { TabSwitcher } from "@/components/TabSwitcher";
+import { appStore } from "@/store/beer.store";
 
 export default function Home() {
-  const {
-    data: beers,
-    isLoading,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-  } = useBeers();
+  const tabs = [
+    {
+      id: 1,
+      name: "All Beers",
+      component: <AllBeers />,
+    },
+    {
+      id: 2,
+      name: "My Beers",
+      component: <MyBeers />,
+    },
+  ];
+
   return (
-    <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="grid grid-cols-1 gap-4 lg:sm:grid-cols-2 p-10">
-          {beers?.pages?.map((page) =>
-            page?.data?.map((beer) => (
-              <Fragment key={beer.id}>
-                <BeerInfo beer={beer} />
-              </Fragment>
-            ))
-          )}
-        </div>
-      )}
-      {isFetchingNextPage && <p>Loading more...</p>}
-      <div
+    <div>
+      <TabSwitcher
+        tabs={tabs}
+        headerRightComponent={
+          <button
+            className="btn-primary btn mr-10 capitalize"
+            onClick={() => appStore.setCreatingBeer(true)}
+          >
+            Add a New Beer
+          </button>
+        }
+        showHeaderRightComponentOn={[2]}
+      ></TabSwitcher>
+      <button
+        className="btn-primary btn absolute -top-[60px] right-10 capitalize"
         onClick={() => {
-          if (!isFetchingNextPage && hasNextPage) {
-            fetchNextPage();
-          }
+          appStore.setCreatingBeer(true);
         }}
       >
-        Load More
-      </div>
-    </>
+        Add a New Beer
+      </button>
+    </div>
   );
 }
