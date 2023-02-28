@@ -1,14 +1,18 @@
 import { API, PAGE_SIZE } from "@/API";
 import { Beer } from "@/types/beer";
 import { WithPage } from "@/types/utils";
-import { QueryFunction, useInfiniteQuery } from "@tanstack/react-query";
+import { type QueryFunction, useInfiniteQuery } from "@tanstack/react-query";
 
-export const getAllBeers: QueryFunction<{
+const queryRoutes = {
+  getAllBeers: "beers",
+} as const;
+
+const getAllBeers: QueryFunction<{
   data: Beer[];
   page: number;
 }> = async (_context) => {
   const page: number = _context.pageParam ?? 1;
-  const { data } = await API.get("beers", {
+  const { data } = await API.get(queryRoutes.getAllBeers, {
     params: {
       page,
       per_page: PAGE_SIZE,
@@ -18,16 +22,18 @@ export const getAllBeers: QueryFunction<{
 };
 
 export const beersKey = {
-  all: ["beers"] as const,
+  all: [queryRoutes.getAllBeers] as const,
 };
 
-export const useBeers = () => {
-  return useInfiniteQuery(beersKey.all, getAllBeers, {
+export const useBeers = () =>
+  useInfiniteQuery(beersKey.all, getAllBeers, {
     getNextPageParam: (lastPage: WithPage<Beer>) => {
       if (lastPage?.data?.length) {
         return lastPage.page + 1;
       }
       return undefined;
     },
+    onError: (err: any) => {
+      console.log({ err });
+    },
   });
-};
