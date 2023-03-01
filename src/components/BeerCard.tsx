@@ -31,7 +31,7 @@ export function BeerCard({
   return (
     <div className="flex gap-3 rounded-lg bg-white p-5 shadow-md hover:cursor-pointer hover:bg-blue-50 hover:shadow-none lg:sm:gap-6">
       <div
-        className="tooltip tooltip-right tooltip-primary relative mx-2 lg:sm:mx-4"
+        className="tooltip tooltip-right tooltip-primary mx-2 lg:sm:mx-4"
         data-tip={
           getIngredients() ? `Ingredients: ${getIngredients()}` : undefined
         }
