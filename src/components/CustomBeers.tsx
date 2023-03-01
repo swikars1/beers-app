@@ -11,7 +11,9 @@ export function CustomBeers() {
   const creatingBeer = useAppStore((state) => state.creatingBeer);
   const setCreatingBeer = useAppStore((state) => state.setCreatingBeer);
 
-  const [myBeersState, setMyBeersState] = useState<Beer[]>([]);
+  const [myBeersState, setMyBeersState] = useState<Beer[] | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     setMyBeersState(myBeers);
@@ -20,7 +22,9 @@ export function CustomBeers() {
   return (
     <div>
       {creatingBeer && <MyBeerForm />}
-      {myBeersState.length === 0 ? (
+      {!myBeersState ? (
+        <p>Loading...</p>
+      ) : myBeersState.length === 0 ? (
         <div className="mx-10 flex flex-col items-center bg-slate-100 pt-[200px] pb-[350px]">
           <p>Nothing to see yet.</p>
           <div>
