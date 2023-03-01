@@ -3,6 +3,7 @@ import { Beer } from "@/types/beer";
 import { Fragment, useEffect } from "react";
 import { subscribe, useSnapshot } from "valtio";
 import { BeerCard } from "./BeerCard";
+import { BeerListWrapper } from "./BeerListWrapper";
 import { MyBeerForm } from "./MyBeerForm";
 
 const BEER_STORAGE_KEY = "myBeers";
@@ -29,7 +30,7 @@ export function MyBeers() {
           </p>
         </div>
       ) : (
-        <div className="mt-10 grid grid-cols-1 gap-6 p-10 lg:sm:grid-cols-2">
+        <BeerListWrapper>
           {myBeers.map(
             (beer) =>
               beer && (
@@ -38,7 +39,7 @@ export function MyBeers() {
                 </Fragment>
               )
           )}
-        </div>
+        </BeerListWrapper>
       )}
     </div>
   );

@@ -23,7 +23,7 @@ export function MyBeerForm() {
   return (
     <div
       onClick={() => {}}
-      className="absolute top-0 z-10 h-[100vh] w-[100vw] bg-[#1c1c1c90]"
+      className="absolute top-0 z-10 h-[100vh] w-[100vw] bg-[#16161690]"
     >
       <div className="absolute left-[50%] top-[50%] w-[355px] translate-x-[-50%] translate-y-[-55%] rounded-md bg-white p-8 lg:sm:w-[500px]">
         <div className="flex flex-col items-start">

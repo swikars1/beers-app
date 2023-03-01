@@ -23,7 +23,7 @@ export default function Home() {
         tabs={tabs}
         headerRightComponent={
           <button
-            className="btn-primary btn mr-10 capitalize"
+            className="btn-primary btn mr-4 capitalize lg:sm:mr-10"
             onClick={() => appStore.setCreatingBeer(true)}
           >
             Add a New Beer
@@ -31,14 +31,6 @@ export default function Home() {
         }
         showHeaderRightComponentOn={[2]}
       ></TabSwitcher>
-      <button
-        className="btn-secondary btn-xs absolute -top-[60px] right-10 capitalize"
-        onClick={() => {
-          appStore.setCreatingBeer(true);
-        }}
-      >
-        Add a News Beer
-      </button>
     </div>
   );
 }
