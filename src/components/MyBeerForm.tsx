@@ -1,6 +1,7 @@
 import { appStore, beerStore } from "@/store/beer.store";
 import { Beer } from "@/types/beer";
 import { FieldValues, useForm } from "react-hook-form";
+import Image from "next/image";
 
 export function MyBeerForm() {
   const {
@@ -32,7 +33,7 @@ export function MyBeerForm() {
           </div>
           <div className="mt-6 flex w-full flex-col items-start">
             <div className="mb-4 flex h-[130px] w-[130px] justify-center border">
-              <img
+              <Image
                 className="object-contain"
                 src={DUMMY_BEER_IMAGE_URL}
                 alt="dummy beer"
