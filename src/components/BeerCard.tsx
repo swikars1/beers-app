@@ -45,7 +45,9 @@ export function BeerCard({
         />
       </div>
       <div className="max-h-35 w-full lg:sm:max-h-40">
-        <h2 className="mb-3 text-2xl font-bold line-clamp-2">{name}</h2>
+        <h2 className="mb-3 text-xl font-bold line-clamp-2 lg:sm:text-2xl">
+          {name}
+        </h2>
         <p className="mb-3 font-semibold text-yellow-600 line-clamp-1">
           {tagline}
         </p>
