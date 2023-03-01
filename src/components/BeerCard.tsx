@@ -29,15 +29,15 @@ export function BeerCard({
   }
 
   return (
-    <div className="flex gap-6 rounded-lg bg-white p-5 shadow-lg hover:cursor-pointer hover:bg-blue-50 hover:shadow-none">
+    <div className="flex gap-3 rounded-lg bg-white p-5 shadow-lg hover:cursor-pointer hover:bg-blue-50 hover:shadow-none lg:sm:gap-6">
       <div
-        className="tooltip tooltip-right tooltip-primary relative w-1/6 sm:mx-1 lg:mx-4"
+        className="tooltip tooltip-right tooltip-primary relative sm:mx-1 lg:mx-4"
         data-tip={
           getIngredients() ? `Ingredients: ${getIngredients()}` : undefined
         }
       >
         <Image
-          className="h-40 w-20 object-contain object-center"
+          className="h-40 min-w-[55px] object-contain object-center"
           src={image_url || "/no_image.png"}
           alt="beer image"
           height={160}

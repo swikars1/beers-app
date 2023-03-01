@@ -16,7 +16,7 @@ export function AllBeers() {
       {isLoading ? (
         <p className="m-auto my-4 flex justify-center">Loading...</p>
       ) : (
-        <div className="mx-10 mt-20 grid grid-cols-1 gap-6 lg:sm:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-6 p-10 lg:sm:grid-cols-2">
           {beers?.pages?.map((page) =>
             page?.data?.map((beer) => (
               <Fragment key={beer.id}>
@@ -27,7 +27,7 @@ export function AllBeers() {
         </div>
       )}
       {isFetchingNextPage ? (
-        <p className="m-auto my-6  flex justify-center font-bold">
+        <p className="m-auto my-6 flex justify-center font-bold">
           Loading more...
         </p>
       ) : hasNextPage ? (
@@ -40,7 +40,7 @@ export function AllBeers() {
           }}
         >
           <div className="my-6 flex text-blue-500 hover:cursor-pointer">
-            <span className="mr-1  font-semibold">Load More</span>
+            <span className="mr-1 font-semibold">Load More</span>
             <DropdownIcon />
           </div>
         </button>

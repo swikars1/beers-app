@@ -7,18 +7,18 @@ export function TabSwitcher({
   showHeaderRightComponentOn,
 }: {
   tabs: { id: number; name: string; component: React.ReactNode }[];
-  headerRightComponent: React.ReactNode;
-  showHeaderRightComponentOn: number[];
+  headerRightComponent?: React.ReactNode;
+  showHeaderRightComponentOn?: number[];
 }) {
   const [selectedTabId, setSelectedTabId] = useState(1);
   const content = tabs.find((t) => t.id === selectedTabId)?.component;
   return (
     <div>
-      <div className="fixed flex w-full justify-between gap-5 pl-10 pt-5">
-        <div className="flex gap-5">
+      <div className="fixed z-10 flex h-[90px] w-full items-center justify-between gap-5 bg-white pl-10 ">
+        <div className="flex gap-2 lg:sm:gap-5">
           {tabs.map((tab) => (
             <button
-              className={`text-xl font-medium ${
+              className={`text-md font-medium lg:sm:text-xl ${
                 selectedTabId === tab.id ? "text-black" : "text-gray-400"
               }`}
               key={tab.id}
@@ -28,7 +28,9 @@ export function TabSwitcher({
             </button>
           ))}
         </div>
-        {showHeaderRightComponentOn.includes(selectedTabId)
+        {showHeaderRightComponentOn &&
+        headerRightComponent &&
+        showHeaderRightComponentOn.includes(selectedTabId)
           ? headerRightComponent
           : null}
       </div>
