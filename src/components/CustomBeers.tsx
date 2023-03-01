@@ -25,7 +25,7 @@ export function CustomBeers() {
       {!myBeersState ? (
         <p>Loading...</p>
       ) : myBeersState.length === 0 ? (
-        <div className="mx-10 flex flex-col items-center bg-slate-100 pt-[200px] pb-[350px]">
+        <div className="mx-10 flex flex-col items-center bg-slate-100 pt-[150px] pb-[280px] lg:sm:pt-[200px] lg:sm:pb-[350px]">
           <p>Nothing to see yet.</p>
           <div>
             <span
