@@ -29,7 +29,7 @@ export function CustomBeers() {
           <p>Nothing to see yet.</p>
           <div>
             <span
-              className="mr-1 text-blue-500"
+              className="mr-1 text-blue-500 hover:cursor-pointer"
               onClick={() => {
                 setCreatingBeer(true);
               }}
